@@ -52,6 +52,9 @@ def make_title(repo_title, issue):
 def make_reporter(issue):
     return "%s@users.github.com" % issue.user.login
 
+ def make_category(repo_title):
+  return "%s" % (repo_title)
+
 def make_todo(issue, repo_title = None):
     if repo_title is None:
         repo_title = issue.repository.name
@@ -65,6 +68,7 @@ def make_todo(issue, repo_title = None):
         todo['last-modified'] = issue.updated_at
         todo['status'] = 'NEEDS-ACTION'
         todo['organizer'] = make_reporter(issue)
+        todo['category'] = make_category(repo_title)
         return todo
 
     except Exception:
